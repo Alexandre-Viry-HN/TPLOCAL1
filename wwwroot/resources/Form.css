@@ -1,0 +1,49 @@
+﻿.image {
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+h1 {
+    margin-right: 170px;
+    margin-left: 170px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+nav {
+    width: 150px;
+    border: 2px solid #8c014c;
+    background-color: #8c014c;
+    color: white;
+    float: left;
+}
+
+li {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+a {
+    color: chocolate;
+}
+
+section {
+    margin-left: 170px;
+}
+
+.tp-table {
+    border-collapse: collapse;
+}
+
+.tp-table td {
+    border: 1px solid #444;
+}
+
+.tp-table .tp-th-center {
+    text-align: center;
+    font-size: 1em;
+    font-weight: normal;
+}
