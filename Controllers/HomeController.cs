@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using System.Text.RegularExpressions;
 using System.Xml;
 using TPLOCAL1.Models;
+using static Microsoft.FSharp.Core.ByRefKinds;
 
 //Subject is find at the root of the project and the logo in the wwwroot/ressources folders of the solution
 //--------------------------------------------------------------------------------------
@@ -37,13 +40,18 @@ namespace TPLOCAL1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ValidationFormulaire(FormModel model)
         {
+            string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+
+            if (!string.IsNullOrWhiteSpace(model.Prenom) && Regex.IsMatch(model.Prenom, @"[^a-zA-Z\-]"))
+                ModelState.AddModelError(nameof(model.Prenom), "Entrez un prénom valide.");
+            if (!string.IsNullOrWhiteSpace(model.Nom) && Regex.IsMatch(model.Nom, @"[^a-zA-Z\-]"))
+                ModelState.AddModelError(nameof(model.Nom), "Entrez un nom valide.");
             if (model.DateDebut.HasValue && model.DateDebut.Value >= new DateTime(2021, 1, 1))
                 ModelState.AddModelError(nameof(model.DateDebut), "La date doit être antérieure au 01/01/2021");
-            if (string.IsNullOrWhiteSpace(model.Genre))
-                ModelState.AddModelError(nameof(model.Genre), "Sélectionnez un sexe.");
-            if (string.IsNullOrWhiteSpace(model.TypeFormation))
-                ModelState.AddModelError(nameof(model.TypeFormation), "Sélectionnez une formation.");
-
+            if (!string.IsNullOrWhiteSpace(model.CodePostal) && (model.CodePostal.Length != 5 || !Regex.IsMatch(model.CodePostal, @"^\d+$")))
+                ModelState.AddModelError(nameof(model.CodePostal), "Un code postal doit contenir 5 chiffres.");
+            if (!string.IsNullOrWhiteSpace(model.TypeFormation) && !Regex.IsMatch(model.Email, pattern))
+                ModelState.AddModelError(nameof(model.Email), "Format e-mail invalide.");
             if (!ModelState.IsValid)
                 return View("Form", model);
             return View("Validation", model);

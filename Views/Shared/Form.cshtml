@@ -7,6 +7,7 @@
 
 <head>
     <title>Formulaire</title>
+    <link rel="stylesheet" href="~/resources/Index.css" />
     <link rel="stylesheet" href="~/resources/Form.css"/>
 </head>
 
@@ -32,14 +33,14 @@
                     <td>Nom</td>
                     <td>
                         <input asp-for="Nom" />
-                        <span asp-validation-for="Nom"></span>
+                        <span style="color: red" asp-validation-for="Nom"></span>
                     </td>
                 </tr>
                 <tr>
                     <td>Prénom</td>
                     <td>
                         <input asp-for="Prenom" />
-                        <span asp-validation-for="Prenom"></span>
+                        <span style="color: red" asp-validation-for="Prenom"></span>
                     </td>
                 </tr>
                 <tr>
@@ -51,35 +52,35 @@
                             <option>Femme</option>
                             <option>Autre</option>
                         </select>
-                        <span asp-validation-for="Genre"></span>
+                        <span style ="color: red" asp-validation-for="Genre"></span>
                     </td>
                 </tr>
                 <tr>
                     <td>Adresse</td>
                     <td>
                         <input asp-for="Adresse" />
-                        <span asp-validation-for="Adresse"></span>
+                        <span style="color: red" asp-validation-for="Adresse"></span>
                     </td>
                 </tr>
                 <tr>
                     <td>Code postal</td>
                     <td>
                         <input asp-for="CodePostal" />
-                        <span asp-validation-for="CodePostal"></span>
+                        <span style="color: red" asp-validation-for="CodePostal"></span>
                     </td>
                 </tr>
                 <tr>
                     <td>Ville</td>
                     <td>
                         <input asp-for="Ville" />
-                        <span asp-validation-for="Ville"></span>
+                        <span style="color: red" asp-validation-for="Ville"></span>
                     </td>
                 </tr>
                 <tr>
                     <td>Adresse courriel</td>
                     <td>
                         <input asp-for="Email" />
-                        <span asp-validation-for="Email"></span>
+                        <span style="color: red" asp-validation-for="Email"></span>
                     </td>
                 </tr>
             </table>
@@ -89,7 +90,7 @@
                     <td>Date de début de la formation</td>
                     <td>
                         <input asp-for="DateDebut" type="date" />
-                        <span asp-validation-for="DateDebut"></span>
+                        <span style="color: red" asp-validation-for="DateDebut"></span>
                     </td>
                 </tr>
                 <tr>
@@ -101,7 +102,7 @@
                             <option>Formation par objets</option>
                             <option>Formation à double compétence</option>
                         </select>
-                        <span asp-validation-for="Genre"></span>
+                        <span style="color: red" asp-validation-for="TypeFormation"></span>
                     </td>
                 </tr>
             </table>
@@ -109,11 +110,11 @@
                 <tr><th colspan="2" class="tp-th-center">Examens de la formation</th></tr>
                 <tr>
                     <td>Cobol Formation</td>
-                    <td><input asp-for="AvisCobol"/></td>
+                    <td><input asp-for="AvisCobol" /> <span style="color: red" asp-validation-for="AvisCobol"></span></td>
                 </tr>
                 <tr>
                     <td>C# Formation</td>
-                    <td><input asp-for="AvisCSharp"/></td>
+                    <td><input asp-for="AvisCSharp" /> <span style="color: red" asp-validation-for="AvisCSharp"></span></td>
                 </tr>
             </table>
             <button type="submit">Validation</button>
