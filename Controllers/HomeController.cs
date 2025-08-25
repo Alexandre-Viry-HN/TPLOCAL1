@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
+using System.Xml;
 using TPLOCAL1.Models;
 
 //Subject is find at the root of the project and the logo in the wwwroot/ressources folders of the solution
@@ -8,12 +8,8 @@ using TPLOCAL1.Models;
 //The controller must imperatively be name with "Controller" at the end !!!
 namespace TPLOCAL1.Controllers
 {
-    public class HomeController(IWebHostEnvironment env) : Controller
+    public class HomeController : Controller
     {
-        //methode "naturally" call by router
-
-        private readonly IWebHostEnvironment _env = env;
-
         public ActionResult Index(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -24,9 +20,9 @@ namespace TPLOCAL1.Controllers
                 switch (id)
                 {
                     case "OpinionList":
-                        var opinionsPath = Path.Combine(_env.WebRootPath ?? "wwwroot", "XMLFile", "DataAvis.xml");
-                        var list = new OpinionList().GetAvis(opinionsPath);
-                        return View("OpinionList", list);
+                         
+                        var listeAvis = new OpinionList().GetAvis("XlmFile/DataAvis.xml");
+                        return View("OpinionList", listeAvis);
                     case "Form":
                         return View("Form", new FormModel());
                     default:
@@ -41,10 +37,8 @@ namespace TPLOCAL1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ValidationFormulaire(FormModel model)
         {
-            if (model.DateDebut.HasValue && model.DateDebut.Value >= DateTime.Today)
-            {
-                ModelState.AddModelError(nameof(model.DateDebut), "La date doit être antérieure au " + DateTime.Today.ToString("d") + ".");
-            }
+            if (model.DateDebut.HasValue && model.DateDebut.Value >= new DateTime(2021, 1, 1))
+                ModelState.AddModelError(nameof(model.DateDebut), "La date doit être antérieure au 01/01/2021");
             if (string.IsNullOrWhiteSpace(model.Genre))
                 ModelState.AddModelError(nameof(model.Genre), "Sélectionnez un sexe.");
             if (string.IsNullOrWhiteSpace(model.TypeFormation))
